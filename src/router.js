@@ -30,6 +30,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: () => import('./page/System/search.vue')
+    },
+    {
+      path: '/home/newslist',
+      name: 'newlist',
+      component: () => import('./page/Home/newslist.vue')
     }
   ]
 })

@@ -9,13 +9,13 @@
     <!-- 底部导航 -->
     <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" @click.native="$path('/home')">首页</van-tabbar-item>
-      <van-tabbar-item icon="search" @click.native="$path('/search')">搜索</van-tabbar-item>
+      <van-tabbar-item icon="contact" @click.native="$path('/friends')">朋友</van-tabbar-item>
       <van-tabbar-item
         icon="shopping-cart-o"
         :info="$store.state.shopNum"
         @click.native="$path('/cart')"
       >购物车</van-tabbar-item>
-      <van-tabbar-item icon="contact" @click.native="$path('/friends')">我的</van-tabbar-item>
+      <van-tabbar-item icon="search" @click.native="$path('/search')">搜索</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -29,7 +29,9 @@ export default {
     }
   },
   methods: {
-    onClickLeft() {},
+    onClickLeft() {
+      this.$back()
+    },
     search() {}
   },
   mounted() {
