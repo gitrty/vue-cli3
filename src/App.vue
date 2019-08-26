@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <!-- 顶部 -->
-    <van-nav-bar title="标题" left-text="返回" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="Vue-App" left-text="返回" left-arrow @click-left="onClickLeft">
       <van-icon name="search" slot="right" @click.native="search" />
     </van-nav-bar>
+
     <!-- 路由 -->
-    <router-view />
+    <div class="main">
+      <transition name="toyo">
+        <router-view />
+      </transition>
+    </div>
+
     <!-- 底部导航 -->
     <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" @click.native="$path('/home')">首页</van-tabbar-item>
@@ -17,6 +23,7 @@
       >购物车</van-tabbar-item>
       <van-tabbar-item icon="search" @click.native="$path('/search')">搜索</van-tabbar-item>
     </van-tabbar>
+    <!--  -->
   </div>
 </template>
 
@@ -42,13 +49,15 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  // 解决使用vue动画时x轴出现滚动条
+  overflow-x: hidden;
 }
 #nav {
   padding: 30px;
@@ -59,5 +68,22 @@ export default {
       color: #42b983;
     }
   }
+}
+.main{
+  height: 100%;
+}
+// 路由切换动画
+.toyo-enter {
+  transform: translateX(100%);
+}
+.toyo-leave-to {
+  transform: translateX(-100%);
+  position: absolute;
+  // 解决路由动画时 轮播图 全部显示 (有3张图片,所以-300%)
+  left: -300%;
+}
+.toyo-enter-active,
+.toyo-leave-active {
+  transition: 1s all ease;
 }
 </style>

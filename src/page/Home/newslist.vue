@@ -3,7 +3,6 @@
     <van-card v-for="news in newsList" :key="news.id" :title="news.title" :thumb="news.img_url">
       <template #price>{{news.add_time}}</template>
       <template #num>点击了{{news.click}}次</template>
-
     </van-card>
   </div>
 </template>
