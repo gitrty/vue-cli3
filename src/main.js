@@ -5,11 +5,17 @@ import store from './store'
 import './registerServiceWorker'
 
 import vant from './plugin/vant'
-Vue.use(vant)
+import common from './common'
+import toyo from './components'
+
+Vue
+  .use(vant)
+  .use(common)
+  .use(toyo)
 
 Vue.config.productionTip = false
 
-new Vue({
+export const vue = new Vue({
   router,
   store,
   render: h => h(App)

@@ -8,15 +8,20 @@
     <router-view />
     <!-- 底部导航 -->
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search">标签</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
-      <van-tabbar-item icon="contact">我的</van-tabbar-item>
+      <van-tabbar-item icon="home-o" @click.native="$path('/home')">首页</van-tabbar-item>
+      <van-tabbar-item icon="search" @click.native="$path('/search')">搜索</van-tabbar-item>
+      <van-tabbar-item
+        icon="shopping-cart-o"
+        :info="$store.state.shopNum"
+        @click.native="$path('/cart')"
+      >购物车</van-tabbar-item>
+      <van-tabbar-item icon="contact" @click.native="$path('/friends')">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
+import api from '@api'
 export default {
   data() {
     return {
@@ -25,14 +30,19 @@ export default {
   },
   methods: {
     onClickLeft() {},
-    search () {}
+    search() {}
+  },
+  mounted() {
+    api.getLunbo().then(({ data: { message } }) => {
+      this.$store.state.lunbo = message
+    })
   }
 }
 </script>
 
 <style lang="less">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
