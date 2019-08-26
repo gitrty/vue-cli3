@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
+import vant from './plugin/vant'
+Vue.use(vant)
+
 Vue.config.productionTip = false
 
 new Vue({
