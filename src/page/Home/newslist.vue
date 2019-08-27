@@ -1,6 +1,12 @@
 <template>
   <div>
-    <van-card v-for="news in newsList" :key="news.id" :title="news.title" :thumb="news.img_url">
+    <van-card
+      v-for="news in newsList"
+      :key="news.id"
+      :title="news.title"
+      :thumb="news.img_url"
+      @click.native="$path(`/home/newsinfo/${news.id}`)"
+    >
       <template #price>{{news.add_time}}</template>
       <template #num>点击了{{news.click}}次</template>
     </van-card>
@@ -16,9 +22,9 @@ export default {
     }
   },
   created() {
+    // 获取新闻
     api.getNews().then(({ data: { message } }) => {
       this.newsList = message
-      console.info(message)
     })
   }
 }
@@ -29,13 +35,13 @@ export default {
   text-align: left;
   min-height: 55px;
 }
-.van-card__thumb{
+.van-card__thumb {
   height: 55px;
 }
-.van-card__price{
+.van-card__price {
   margin-top: 18px;
 }
-.van-card__num{
+.van-card__num {
   margin-top: 18px;
 }
 </style>

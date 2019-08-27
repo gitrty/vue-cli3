@@ -1,16 +1,14 @@
 <template>
-  <div id="app">
+  <div id="app" @click="add">
     <!-- 顶部 -->
-    <van-nav-bar title="Vue-App" left-text="返回" left-arrow @click-left="onClickLeft">
+    <van-nav-bar title="Vue-App" left-text="返回" left-arrow @click-left="onClickLeft" fixed>
       <van-icon name="search" slot="right" @click.native="search" />
     </van-nav-bar>
 
     <!-- 路由 -->
-    <div class="main">
-      <transition name="toyo">
-        <router-view />
-      </transition>
-    </div>
+    <transition name="toyo">
+      <router-view />
+    </transition>
 
     <!-- 底部导航 -->
     <van-tabbar v-model="active">
@@ -29,6 +27,7 @@
 
 <script>
 import api from '@api'
+import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -39,12 +38,23 @@ export default {
     onClickLeft() {
       this.$back()
     },
-    search() {}
+    search() {},
+    // vuex-mapActions  -----
+    ...mapActions(['add'])
+  },
+  computed: {
+    // vuex-mapState   -----
+    ...mapState({
+      shopNum: state => state.shopNum
+    }),
+    // vuex-mapGetters  -----
+    ...mapGetters([])
   },
   mounted() {
     api.getLunbo().then(({ data: { message } }) => {
       this.$store.state.lunbo = message
     })
+    console.info(this.shopNum)
   }
 }
 </script>
@@ -58,6 +68,8 @@ export default {
   color: #2c3e50;
   // 解决使用vue动画时x轴出现滚动条
   overflow-x: hidden;
+  padding-top:46px;
+  padding-bottom: 50px;
 }
 #nav {
   padding: 30px;
@@ -68,9 +80,6 @@ export default {
       color: #42b983;
     }
   }
-}
-.main{
-  height: 100%;
 }
 // 路由切换动画
 .toyo-enter {

@@ -35,6 +35,16 @@ export default new Router({
       path: '/home/newslist',
       name: 'newlist',
       component: () => import('./page/Home/newslist.vue')
+    },
+    {
+      path: '/home/newsinfo/:id',
+      name: 'newsinfo',
+      component: () => import('./page/Home/newsinfo.vue')
+    },
+    {
+      path: '/home/photolist',
+      name: 'photolist',
+      component: () => import('./page/Home/photolist.vue')
     }
   ]
 })
